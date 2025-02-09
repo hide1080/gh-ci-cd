@@ -1,0 +1,15 @@
+name: LogLevelChoice
+on:
+  workflow_dispatch:                       # 手動実行イベント
+    inputs:
+      log-level:                           # 入力パラメータ名
+        type: choice                       # 特定の値に制限
+        options:                           # 受け付ける入力値を列挙
+          - info
+          - warn
+          - error
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ inputs.log-level }}"
