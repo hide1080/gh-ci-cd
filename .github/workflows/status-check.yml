@@ -1,0 +1,9 @@
+name: Status check functions
+on: push
+jobs:
+  skip-or-run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1           # error occurs
+      - run: echo "Hello"
+        if: ${{ failure() }}
