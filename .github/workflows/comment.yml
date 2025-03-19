@@ -11,4 +11,7 @@ jobs:
       - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Hello, ${GITHUB_ACTOR}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Github CLI クレデンシャル
-          GH_TOKEN: ${{ github.token }} # この書き方でも可
+      - run: gh pr comment "${GITHUB_HEAD_REF}" --body "Welcom, ${GITHUB_ACTOR}"
+        env:
+            GH_TOKEN: ${{ github.token }} # この書き方でも可
+  
