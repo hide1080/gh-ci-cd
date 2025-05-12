@@ -7,9 +7,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
-          key: test-${{ runner.os }}-${{ github.sha }}
-          path: ${{ github.workspace }}/dummy
-          restore-keys: |
+          key: test-${{ runner.os }}-${{ github.sha }}  # Cache key
+          path: ${{ github.workspace }}/dummy           # Cache path
+          restore-keys: |                               # Restore keys
             test-${{ runner.os }}-
       - run: |
           if [[ -f "${GITHUB_WORKSPACE}/dummy" ]]; then exit 0; fi
