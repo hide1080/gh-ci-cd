@@ -1,0 +1,26 @@
+name: Dump                                    # アクション名
+description: |                                # アクションの説明
+  環境変数と github コンテキストをログ出力する。
+  ワークフローのデバッグ時に使用する。
+inputs:                                       # 入力パラメータ
+  enable-context:
+    default: 'true'                           # デフォルト値
+    required: false                           # 必須かどうか
+    description: github コンテキストを出力するかどうか。
+outputs:
+  dumped-date:
+    value: ${{ steps.current.outputs.date }}  # 出力値
+    description: ダンプ日時
+runs:
+  using: composite                            # 実装方式
+  steps:
+    - run: printenv | sort
+      shell: bash
+    - run: echo "${CONTEXT}"
+      if: ${{ inputs.enable-context == 'true' }}
+      env:
+        CONTEXT: ${{ toJSON(github) }}
+      shell: bash
+    - id: current
+      run: echo "date=$(date)" >> "${GITHUB_OUTPUT}"
+      shell: bash
